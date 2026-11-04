@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>테스트: 동적 폼</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav><a href="index.html">← 목록</a></nav>
+  <h1>동적으로 나타나는 폼</h1>
+  <p class="expect">
+    기대 결과: 버튼을 누르거나 2초가 지나 폼이 나타나면 비밀번호 칸 옆에 <strong>signup</strong> · not_found 배지가 뜸.<br>
+    "비밀번호 보기" 를 눌러 type 이 text 로 바뀌었다 돌아와도 배지가 중복으로 생기지 않아야 함.
+  </p>
+
+  <section>
+    <h2>1. 버튼을 눌러 삽입</h2>
+    <button type="button" id="open">가입 폼 열기</button>
+    <div id="click-slot"></div>
+  </section>
+
+  <section>
+    <h2>2. setTimeout 으로 2초 뒤 삽입</h2>
+    <div id="timer-slot">불러오는 중…</div>
+  </section>
+
+  <template id="signup-form">
+    <form action="/signup" method="post" onsubmit="event.preventDefault()">
+      <label>이메일 <input type="email" name="email" autocomplete="email"></label>
+      <label>비밀번호 <input type="password" name="password" autocomplete="new-password"></label>
+      <button type="button" class="toggle">비밀번호 보기</button>
+      <button type="submit">회원가입</button>
+    </form>
+  </template>
+
+  <script>
+    function insertForm(slot) {
+      slot.replaceChildren(document.getElementById('signup-form').content.cloneNode(true));
+      // "비밀번호 보기": type 을 password ↔ text 로 바꾼다
+      const toggle = slot.querySelector('.toggle');
+      const input = slot.querySelector('input[name="password"]');
+      toggle.addEventListener('click', () => {
+        const showing = input.type === 'text';
+        input.type = showing ? 'password' : 'text';
+        toggle.textContent = showing ? '비밀번호 보기' : '비밀번호 숨기기';
+      });
+    }
+
+    document.getElementById('open').addEventListener('click', (event) => {
+      insertForm(document.getElementById('click-slot'));
+      event.target.disabled = true;
+    });
+    setTimeout(() => insertForm(document.getElementById('timer-slot')), 2000);
+  </script>
+</body>
+</html>

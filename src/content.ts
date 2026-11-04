@@ -1,4 +1,5 @@
 import { classifyPasswordField, FormKind, PasswordFieldContext, shouldShowRule } from './detection';
+import { showDetectionBadge } from './devBadge';
 import { GetRuleRequest, GetRuleResponse } from './messages';
 
 const MAX_TEXT_LENGTH = 2000;
@@ -62,8 +63,11 @@ function requestRule(): Promise<GetRuleResponse> {
 }
 
 function handlePasswordField(input: HTMLInputElement, kind: FormKind): void {
+  // 개발 빌드에서는 로그인/알 수 없음까지 판별 결과를 입력란 옆에 보여준다
+  const updateBadge = __DEV__ ? showDetectionBadge(input, kind) : null;
   if (!shouldShowRule(kind)) return;
   requestRule().then((response) => {
+    if (__DEV__) updateBadge?.(response);
     // 규칙 표시 UI 는 #3 에서 붙인다
     console.debug('[0password]', kind, input, response);
   });

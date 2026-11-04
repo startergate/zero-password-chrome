@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>테스트: form 없는 SPA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav><a href="index.html">← 목록</a></nav>
+  <!-- form 태그 없이 div 로만 만든 SPA 가입 화면. autocomplete 속성도 없다 -->
+  <main>
+    <h2>새 계정 만들기</h2>
+    <p class="expect">기대 결과: 두 비밀번호 칸 모두 <strong>signup</strong> · not_found</p>
+    <div class="field">아이디 <input type="text" id="userId"></div>
+    <div class="field">비밀번호 <input type="password" id="pw"></div>
+    <div class="field">비밀번호 다시 입력 <input type="password" id="pw2"></div>
+    <div role="button" tabindex="0" id="submit"><button type="button">가입하기</button></div>
+    <p id="result"></p>
+  </main>
+  <script>
+    document.getElementById('submit').addEventListener('click', () => {
+      document.getElementById('result').textContent = '가입 요청을 보냈다고 칩니다 (실제 전송 없음)';
+    });
+  </script>
+</body>
+</html>

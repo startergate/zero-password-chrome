@@ -1,0 +1,8 @@
+/* 테스트 페이지 공통 스타일 */
+body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; line-height: 1.6; }
+.expect { padding: 8px 12px; border-left: 4px solid #2563eb; background: #eff6ff; }
+label { display: block; margin-top: 12px; }
+input { display: block; width: 260px; padding: 6px; margin-top: 4px; }
+button { margin-top: 16px; padding: 8px 16px; }
+.field { margin-top: 12px; }
+nav { margin-bottom: 24px; }
