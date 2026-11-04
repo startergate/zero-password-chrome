@@ -9,7 +9,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch",
-    "test": "bun test"
+    "test": "bun test",
+    "serve:test": "bun scripts/serve-test-pages.ts"
   },
   "devDependencies": {
     "@types/chrome": "^0.1.42",

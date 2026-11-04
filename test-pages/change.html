@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>테스트: 비밀번호 변경</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav><a href="index.html">← 목록</a></nav>
+  <h1>비밀번호 변경</h1>
+  <p class="expect">기대 결과: 세 비밀번호 칸 모두 <strong>change</strong> · not_found</p>
+  <form action="/account/password" method="post" onsubmit="event.preventDefault()">
+    <label>현재 비밀번호 <input type="password" name="current_password" autocomplete="current-password"></label>
+    <label>새 비밀번호 <input type="password" name="new_password" autocomplete="new-password"></label>
+    <label>새 비밀번호 확인 <input type="password" name="new_password_confirm" autocomplete="new-password"></label>
+    <button type="submit">비밀번호 변경</button>
+  </form>
+</body>
+</html>

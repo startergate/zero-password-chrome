@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>0password 수동 테스트 페이지</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>0password 수동 테스트 페이지</h1>
+  <p>
+    개발 빌드(<code>npm run dev</code>)를 로드하면 비밀번호 입력란 옆에 <code>0pw: 종류 · 조회 결과</code> 배지가 뜨고,
+    입력란에 <code>data-0password-kind</code> 속성이 붙습니다. 각 페이지의 기대 결과와 비교하세요.
+  </p>
+  <table>
+    <thead><tr><th>페이지</th><th>기대 결과</th><th>확인할 것</th></tr></thead>
+    <tbody>
+      <tr><td><a href="signup.html">signup.html</a></td><td>signup</td><td>autocomplete=new-password 가입 폼</td></tr>
+      <tr><td><a href="login.html">login.html</a></td><td>login</td><td>current-password 로그인 폼. 규칙 조회를 하지 않음</td></tr>
+      <tr><td><a href="change.html">change.html</a></td><td>change</td><td>현재/새/확인 비밀번호 변경 폼</td></tr>
+      <tr><td><a href="spa-no-form.html">spa-no-form.html</a></td><td>signup</td><td>&lt;form&gt; 없이 div 와 JS 버튼만 있는 SPA 화면, autocomplete 없음</td></tr>
+      <tr><td><a href="dynamic.html">dynamic.html</a></td><td>signup</td><td>나중에 삽입되는 폼과 "비밀번호 보기" 토글 (MutationObserver)</td></tr>
+    </tbody>
+  </table>
+  <p>규칙 조회는 #1 전까지 항상 <code>not_found</code> 를 돌려줍니다.</p>
+</body>
+</html>
