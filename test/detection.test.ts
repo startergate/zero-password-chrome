@@ -60,9 +60,9 @@ describe('classifyPasswordField', () => {
   });
 });
 
-test('shouldShowRule 은 가입·변경 폼에서만 true', () => {
-  expect(shouldShowRule('signup')).toBe(true);
-  expect(shouldShowRule('change')).toBe(true);
-  expect(shouldShowRule('login')).toBe(false);
+test('shouldShowRule 은 로그인 폼에서만 true', () => {
+  expect(shouldShowRule('login')).toBe(true);
+  expect(shouldShowRule('signup')).toBe(false);
+  expect(shouldShowRule('change')).toBe(false);
   expect(shouldShowRule('unknown')).toBe(false);
 });

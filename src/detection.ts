@@ -70,7 +70,7 @@ export function classifyPasswordField(context: PasswordFieldContext): FormKind {
   return 'unknown';
 }
 
-/** 규칙을 보여줄 폼인지. 로그인 폼에서는 규칙이 필요 없다. */
+/** 규칙을 보여줄 폼인지. 가입·변경 화면은 사이트가 규칙을 직접 보여주므로 로그인 폼에서만 띄운다. */
 export function shouldShowRule(kind: FormKind): boolean {
-  return kind === 'signup' || kind === 'change';
+  return kind === 'login';
 }

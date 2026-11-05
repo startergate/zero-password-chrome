@@ -29,12 +29,12 @@ bun run serve:test   # http://localhost:5174 (PORT 환경 변수로 바꿀 수 �
 
 `test-pages/` 에 가입, 로그인, 비밀번호 변경, form 없는 SPA, 동적으로 나타나는 폼 페이지가 있고, 각 페이지에 기대 결과가 적혀 있습니다.
 
-개발 빌드에서는 비밀번호 입력란 옆에 판별 결과 배지(`0pw: signup · not_found` 등)가 뜨고, 입력란에 `data-0password-kind` 속성이 붙습니다.
+개발 빌드에서는 비밀번호 입력란 옆에 판별 결과 배지(`0pw: login · not_found`, `0pw: signup` 등)가 뜨고, 입력란에 `data-0password-kind` 속성이 붙습니다.
 배지는 프로덕션 빌드에는 들어가지 않습니다.
 
 ## 규칙 조회
 
-가입/변경 폼을 찾으면 content script 가 background 에 호스트 이름을 보내고, background 는 [`zero-password/lite`](https://www.npmjs.com/package/zero-password) 로 `https://0password.startergate.dev/api/<domain>` 에서 규칙을 받아옵니다.
+로그인 폼을 찾으면 content script 가 background 에 호스트 이름을 보내고, background 는 [`zero-password/lite`](https://www.npmjs.com/package/zero-password) 로 `https://0password.startergate.dev/api/<domain>` 에서 규칙을 받아옵니다. 가입·변경 화면은 사이트가 규칙을 직접 보여주므로 조회하지 않습니다.
 
 - 받은 결과는 `chrome.storage.local` 에 하루 동안 캐시합니다. 규칙이 없다는 결과(404)도 캐시합니다.
 - 네트워크·서버 오류는 캐시하지 않고 `network` 로 돌려주며, 다음 페이지 로드에서 다시 시도합니다.
