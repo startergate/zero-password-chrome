@@ -32,4 +32,14 @@ bun run serve:test   # http://localhost:5174 (PORT 환경 변수로 바꿀 수 �
 개발 빌드에서는 비밀번호 입력란 옆에 판별 결과 배지(`0pw: signup · not_found` 등)가 뜨고, 입력란에 `data-0password-kind` 속성이 붙습니다.
 배지는 프로덕션 빌드에는 들어가지 않습니다.
 
-규칙 조회는 아직 구현되지 않아서(#1) 가입/변경 폼에서도 항상 `not_found` 가 나옵니다.
+## 규칙 조회
+
+가입/변경 폼을 찾으면 content script 가 background 에 호스트 이름을 보내고, background 는 [`zero-password/lite`](https://www.npmjs.com/package/zero-password) 로 `https://0password.startergate.dev/api/<domain>` 에서 규칙을 받아옵니다.
+
+- 받은 결과는 `chrome.storage.local` 에 하루 동안 캐시합니다. 규칙이 없다는 결과(404)도 캐시합니다.
+- 네트워크·서버 오류는 캐시하지 않고 `network` 로 돌려주며, 다음 페이지 로드에서 다시 시도합니다.
+- `localhost` 처럼 점이 없는 호스트는 요청 없이 `not_found` 입니다.
+
+테스트 페이지는 localhost 에서 열리므로, 개발 빌드에서는 `<meta name="0password-test-domain" content="daum.net">` 가 있으면 그 도메인으로 조회합니다 (`test-pages/rule-found.html`). 프로덕션 빌드는 이 태그를 보지 않습니다.
+
+캐시를 비우려면 확장 프로그램의 service worker DevTools 에서 `chrome.storage.local.clear()` 를 실행합니다.

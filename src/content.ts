@@ -52,9 +52,19 @@ function buildContext(input: HTMLInputElement): PasswordFieldContext {
   };
 }
 
+// 개발 빌드에서는 테스트 페이지가 <meta name="0password-test-domain"> 로 조회할 도메인을 바꿀 수 있다.
+// localhost 는 규칙을 조회할 수 없는 호스트라서, 실제 규칙이 붙는 화면을 확인할 때 쓴다.
+function ruleHostname(): string {
+  if (__DEV__) {
+    const testDomain = document.querySelector<HTMLMetaElement>('meta[name="0password-test-domain"]')?.content.trim();
+    if (testDomain) return testDomain;
+  }
+  return location.hostname;
+}
+
 function requestRule(): Promise<GetRuleResponse> {
   if (!rulePromise) {
-    const request: GetRuleRequest = { type: 'getRule', hostname: location.hostname };
+    const request: GetRuleRequest = { type: 'getRule', hostname: ruleHostname() };
     rulePromise = chrome.runtime
       .sendMessage<GetRuleRequest, GetRuleResponse>(request)
       .catch((): GetRuleResponse => ({ ok: false, error: 'network' }));
