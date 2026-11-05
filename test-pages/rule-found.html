@@ -9,17 +9,16 @@
 </head>
 <body>
   <nav><a href="index.html">← 목록</a></nav>
-  <h1>회원가입 (daum.net 규칙)</h1>
+  <h1>로그인 (daum.net 규칙)</h1>
   <p class="expect">
-    기대 결과: 두 비밀번호 칸 모두 <strong>signup</strong> · rule: daum.net<br>
+    기대 결과: 비밀번호 칸 옆에 <strong>login</strong> · rule: daum.net<br>
     인터넷이 끊겨 있으면 <code>network</code> 가 뜨고, 다시 연결한 뒤 새로고침하면 규칙이 나와야 합니다.
     한 번 받은 규칙은 하루 동안 <code>chrome.storage.local</code> 에 남아서 오프라인에서도 나옵니다.
   </p>
-  <form action="/signup" method="post" onsubmit="event.preventDefault()">
+  <form action="/login" method="post" onsubmit="event.preventDefault()">
     <label>아이디 <input type="text" name="id" autocomplete="username"></label>
-    <label>비밀번호 <input type="password" name="password" autocomplete="new-password"></label>
-    <label>비밀번호 확인 <input type="password" name="password_confirm" autocomplete="new-password"></label>
-    <button type="submit">가입하기</button>
+    <label>비밀번호 <input type="password" name="password" autocomplete="current-password"></label>
+    <button type="submit">로그인</button>
   </form>
 </body>
 </html>
