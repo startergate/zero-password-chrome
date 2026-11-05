@@ -18,9 +18,10 @@
       <tr><td><a href="login.html">login.html</a></td><td>login</td><td>current-password 로그인 폼. 규칙 조회를 하지 않음</td></tr>
       <tr><td><a href="change.html">change.html</a></td><td>change</td><td>현재/새/확인 비밀번호 변경 폼</td></tr>
       <tr><td><a href="spa-no-form.html">spa-no-form.html</a></td><td>signup</td><td>&lt;form&gt; 없이 div 와 JS 버튼만 있는 SPA 화면, autocomplete 없음</td></tr>
+      <tr><td><a href="rule-found.html">rule-found.html</a></td><td>signup · rule: daum.net</td><td>API 에서 규칙을 받아오는지. <code>&lt;meta name="0password-test-domain"&gt;</code> 로 daum.net 을 조회</td></tr>
       <tr><td><a href="dynamic.html">dynamic.html</a></td><td>signup</td><td>나중에 삽입되는 폼과 "비밀번호 보기" 토글 (MutationObserver)</td></tr>
     </tbody>
   </table>
-  <p>규칙 조회는 #1 전까지 항상 <code>not_found</code> 를 돌려줍니다.</p>
+  <p>localhost 는 규칙을 조회할 수 없는 호스트라서 rule-found.html 을 뺀 페이지는 <code>not_found</code> 가 나옵니다.</p>
 </body>
 </html>
